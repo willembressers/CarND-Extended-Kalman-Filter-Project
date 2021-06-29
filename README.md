@@ -16,15 +16,15 @@ Instead of deleting, creating folders and compile and run, every try. i've creat
 
 ```
 
-[image1]: ./images/compile_and_run.png "Compile and run"
+![Compile and run][./images/compile_and_run.png]
 
 When the extended kalman filter is running, you can start the simulator. 
 
-[image3]: ./images/simulator.png "Simulator"
+![Simulator][./images/simulator.png]
 
 ## Flow
 
-[image2]: ./images/flow.png "Flow"
+![Flow][./images/flow.png]
 
 - First we initialize the matrices and the vectors
 - on each measurement
