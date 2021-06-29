@@ -26,7 +26,7 @@ When the extended kalman filter is running, you can start the simulator.
 
 [image2]: ./images/flow.png "Flow"
 
-1.  First we initialize the matrices and the vectors
-2.  on each measurement
-2.1 predict the new transition
-2.2 update the matrices
+- First we initialize the matrices and the vectors
+- on each measurement
+-  predict the new transition
+-  update the matrices
