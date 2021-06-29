@@ -28,33 +28,33 @@ FusionEKF::FusionEKF() {
 
   // measurement covariance matrix - laser
   R_laser_ << 0.0225, 0,
-              0, 0.0225;
+           0, 0.0225;
 
   // measurement covariance matrix - radar
   R_radar_ << 0.09, 0, 0,
-              0, 0.0009, 0,
-              0, 0, 0.09;
+           0, 0.0009, 0,
+           0, 0, 0.09;
 
   // measurement matrix H - laser
   H_laser_ << 1, 0, 0, 0,
-              0, 1, 0, 0;
+           0, 1, 0, 0;
 
   // Jacobian Matrix
-  Hj_ << 1, 1, 0, 0, 
-         1, 1, 0, 0,
-         1, 1, 1, 1; 
+  Hj_ << 1, 1, 0, 0,
+      1, 1, 0, 0,
+      1, 1, 1, 1;
 
   // state transition matrix
   ekf_.F_ << 1, 0, 1, 0,
-             0, 1, 0, 1,
-             0, 0, 1, 0,
-             0, 0, 0, 1;
+          0, 1, 0, 1,
+          0, 0, 1, 0,
+          0, 0, 0, 1;
 
   // state covariance matrix
   ekf_.P_ << 1, 0, 0, 0,
-             0, 1, 0, 0,
-             0, 0, 1000, 0,
-             0, 0, 0, 1000;
+          0, 1, 0, 0,
+          0, 0, 1000, 0,
+          0, 0, 0, 1000;
 }
 
 //=============================================================================
@@ -135,10 +135,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   // process covariance Q matrix
   ekf_.Q_ << time_delta_4 / 4 * noise_ax, 0, time_delta_3 / 2 * noise_ax, 0,
-             0, time_delta_4 / 4 * noise_ay, 0, time_delta_3 / 2 * noise_ay,
-             time_delta_3 / 2 * noise_ax, 0, time_delta_2 * noise_ax, 0,
-             0, time_delta_3 / 2 * noise_ay, 0, time_delta_2 * noise_ay;
-  
+          0, time_delta_4 / 4 * noise_ay, 0, time_delta_3 / 2 * noise_ay,
+          time_delta_3 / 2 * noise_ax, 0, time_delta_2 * noise_ax, 0,
+          0, time_delta_3 / 2 * noise_ay, 0, time_delta_2 * noise_ay;
+
   // invoke EKF predict()
   ekf_.Predict();
 
@@ -149,7 +149,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    */
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
-    
+
     // Radar updates
     Hj_ = tools.CalculateJacobian(ekf_.x_);
     ekf_.Init(ekf_.x_, ekf_.P_, ekf_.F_, Hj_, R_radar_, ekf_.Q_);

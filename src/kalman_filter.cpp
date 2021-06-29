@@ -3,8 +3,8 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-/* 
- * Please note that the Eigen library does not initialize 
+/*
+ * Please note that the Eigen library does not initialize
  *   VectorXd or MatrixXd objects with zeros upon creation.
  */
 
@@ -76,13 +76,13 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   if (fabs(rho) < 0.0001) {
     rho_dot = 0.0;
   } else {
-    rho_dot = (px *vx + py * vy) / rho;
+    rho_dot = (px * vx + py * vy) / rho;
   }
 
   VectorXd z_pred(3);
   z_pred << rho,
-            phi,
-            rho_dot;
+         phi,
+         rho_dot;
 
   VectorXd y = z - z_pred;
 
@@ -90,7 +90,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   if (y(1) < -M_PI) {
     y(1) += 2 * M_PI;
   } else if (
-    y(1) > M_PI) {y(1) -= 2 * M_PI;
+    y(1) > M_PI) {
+    y(1) -= 2 * M_PI;
   }
 
   MatrixXd Ht = H_.transpose();
